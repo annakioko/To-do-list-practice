@@ -30,6 +30,12 @@ function App() {
     const newTodos = [...todos];
     newTodos[id].checked = !newTodos[id].checked
     setTodos(newTodos);
+
+    function handleEdit(id, newTask) {
+      const newTodos = [...todos];
+      updatedTodos[id].text = newTask;
+      setTodos(updatedTodos);
+    }
  }
 
   // this function generates id because we can't use index or rather should not
@@ -50,6 +56,10 @@ function App() {
       <ol>
         {todos.map((todo) => (
           <li key={todo.id}>{todo.text}
+            <button onClick={function () {
+              const newTask = prompt("Edit your todo");
+              handleEdit(id, newTask);
+            }}>Edit</button>
             <button onClick={handleDeleteTodo}>Delete</button>
             <input 
               type='checkbox'
