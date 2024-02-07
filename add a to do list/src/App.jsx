@@ -18,9 +18,15 @@ function App() {
     const updatedTodos = [...todos];
     updatedTodos[id].added = !updatedTodos[id].added;
     setTodos(updatedTodos);
-  }
+  };
+
+  function handleDeleteTodo(id) {
+    const newTodos = [...todos];
+    newTodos.filter(todo => todo.id !== id);
+    setTodos(newTodos);
+  };
   
-  // this function generates id because we can't use index
+  // this function generates id because we can't use index or rather should not
   const generateUniqueId = () => {
     return '-' + Math.random().toString(36).substring(2, 9);
   };
@@ -37,9 +43,12 @@ function App() {
       <button onClick={handleAddToDo}>Add</button>
       <ol>
         {todos.map((todo) => (
-          <li key={todo.id}>{todo.text}</li>
+          <li key={todo.id}>{todo.text}
+          <button onClick={handleDeleteTodo}>Delete</button>
+          </li>
         ))}
       </ol>
+
     </div>
   );
       };
