@@ -3,21 +3,24 @@ import { useState } from 'react'
 to do that is submitted
 second one is to store the update to do list.*/
 
-const TodoList = () => {
+function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
 
-  const handleAddToDo = () => {
+  function handleAddToDo()  {
     if (newTodo.trim() !== "") {
       setTodos([...todos, { id: generateUniqueId (), text: newTodo.trim(), added: false }]);
       setNewTodo("");
-    } else
-    {
-      alert('Please enter a valid task');
-  }
+    } 
   };
+
+  function handleDisplayTodo(id) {
+    const updatedTodos = [...todos];
+    updatedTodos[id].added = !updatedTodos[id].added;
+    setTodos(updatedTodos);
+  }
   
-  // this function generates id
+  // this function generates id because we can't use index
   const generateUniqueId = () => {
     return '-' + Math.random().toString(36).substring(2, 9);
   };
