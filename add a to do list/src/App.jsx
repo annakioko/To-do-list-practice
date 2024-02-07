@@ -26,6 +26,12 @@ function App() {
     setTodos(newTodos);
   };
   
+  function handleCheckBox(id) {
+    const newTodos = [...todos];
+    newTodos[id].checked = !newTodos[id].checked
+    setTodos(newTodos);
+ }
+
   // this function generates id because we can't use index or rather should not
   const generateUniqueId = () => {
     return '-' + Math.random().toString(36).substring(2, 9);
@@ -44,7 +50,14 @@ function App() {
       <ol>
         {todos.map((todo) => (
           <li key={todo.id}>{todo.text}
-          <button onClick={handleDeleteTodo}>Delete</button>
+            <button onClick={handleDeleteTodo}>Delete</button>
+            <input 
+              type='checkbox'
+              checked={todo.checked}
+              onChange={function () {
+                handleCheckBox(todo.id);
+              }}
+            />
           </li>
         ))}
       </ol>
