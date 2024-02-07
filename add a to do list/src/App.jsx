@@ -7,31 +7,31 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
 
-  function handleAddToDo()  {
+  function addToDo()  {
     if (newTodo.trim() !== "") {
       setTodos([...todos, { id: generateUniqueId (), text: newTodo.trim(), added: false }]);
       setNewTodo("");
     } 
   };
 
-  function handleDisplayTodo(id) {
+  function displayTodo(id) {
     const updatedTodos = [...todos];
     updatedTodos[id].added = !updatedTodos[id].added;
     setTodos(updatedTodos);
   };
 
-  function handleDeleteTodo(id) {
+  function deleteTodo(id) {
     const newTodos = [...todos];
     newTodos.splice(id, 1);
     setTodos(newTodos);
   };
   
-  function handleCheckBox(id) {
+  function checkBox(id) {
     const newTodos = [...todos];
     newTodos[id].checked = !newTodos[id].checked
     setTodos(newTodos);
 
-    function handleEdit(id, newTask) {
+    function edit(id, newTask) {
       const newTodos = [...todos];
       updatedTodos[id].text = newTask;
       setTodos(updatedTodos);
@@ -52,20 +52,20 @@ function App() {
         value={newTodo}
         onChange={(e) => setNewTodo(e.target.value)}
       />
-      <button onClick={handleAddToDo}>Add</button>
+      <button onClick={addToDo}>Add</button>
       <ol>
         {todos.map((todo) => (
           <li key={todo.id}>{todo.text}
             <button onClick={function () {
               const newTask = prompt("Edit your todo");
-              handleEdit(id, newTask);
+              edit(id, newTask);
             }}>Edit</button>
-            <button onClick={handleDeleteTodo}>Delete</button>
+            <button onClick={deleteTodo}>Delete</button>
             <input 
               type='checkbox'
               checked={todo.checked}
               onChange={function () {
-                handleCheckBox(todo.id);
+                checkBox(todo.id);
               }}
             />
           </li>
