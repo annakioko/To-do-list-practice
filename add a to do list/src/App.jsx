@@ -22,7 +22,7 @@ function App() {
 
   function handleDeleteTodo(id) {
     const newTodos = [...todos];
-    newTodos.filter(todo => todo.id !== id);
+    newTodos.splice(id, 1);
     setTodos(newTodos);
   };
   
